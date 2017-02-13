@@ -1,8 +1,14 @@
 import Data.List
 import Data.Numbers.Primes
-import qualified Data.IntSet as S
-main = print $ sum notProperSums
-notProperSums = filter (`S.notMember` properSums) [1..28123]
-properSums = S.fromList [x+y|x<- properNums, y<-properNums]
-properNums = filter ((>) =<< properSum) [1..28123]
+import Data.Array
+
+main = print $ sum notAbundantSums
+
+notAbundantSums = filter (not . any (abundantArray!) . remainders) [1..high]
+  where remainders x = map (x-) $ takeWhile (<= x `div` 2) abundants
+abundants = filter (abundantArray !) [1..high]
+abundantArray = listArray (1, high) $ map abundant [1..high]
+  where abundant = (>) =<< properSum
+
 properSum = (-) =<< product . map (sum . scanl (*) 1) . group . primeFactors
+high = 28123

@@ -1,5 +1,4 @@
 import Data.List.Split (chunksOf)
-import Data.Char (digitToInt, isAlpha)
 
 main = print $ total [1..1000]
 total :: [Int] -> Int
