@@ -1,0 +1,4 @@
+triplets max = [(x, y, z)| x <- [1..max], y <- [x+1..max], let z=max-(x+y), x^2+y^2==z^2]
+main = print $ triplets 1000
+
+
